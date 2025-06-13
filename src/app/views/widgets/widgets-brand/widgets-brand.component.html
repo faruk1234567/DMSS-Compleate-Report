@@ -1,0 +1,70 @@
+<c-row>
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'#3b5998'" [style]="{ '--cui-card-cap-bg': '#3b5998' }"
+                     [values]="[{ title: 'Services', value: this.formatNumber(serviceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(serviceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'#00aced'" [style]="{ '--cui-card-cap-bg': '#00aced' }"
+                     [values]="[{ title: 'Water Bill', value: this.formatNumber(waterBillServiceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(waterBillServiceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'#4875b4'" [style]="{ '--cui-card-cap-bg': '#4875b4' }"
+                     [values]="[{ title: 'Tread License', value: this.formatNumber(tlsServiceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(tlsServiceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'success'" [style]="{ '--cui-card-cap-bg': 'success' }"
+                     [values]="[{ title: 'Holding Tax', value: this.formatNumber(htServiceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(htServiceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'warning'" [style]="{ '--cui-card-cap-bg': 'warning' }"
+                     [values]="[{ title: 'Certificate', value: this.formatNumber(certificateServiceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(certificateServiceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+
+  <c-col sm="6" xl="4">
+    <c-widget-stat-d [color]="'info'" [style]="{ '--cui-card-cap-bg': 'info' }"
+                     [values]="[{ title: 'Property', value: this.formatNumber(htServiceCountAndIncomeData.totalService) + '' }, { title: 'Total Income', value: this.formatNumber(htServiceCountAndIncomeData.totalIncome) + '' }]"
+                     class="mb-4 card-custom-height">
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
+
+
+<!-- Sample Code -->
+<!--
+<c-row>
+  <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
+    <c-widget-stat-d
+      [color]="widget.color ?? ''"
+      [style]="widget.capBg ?? null"
+      [values]="widget.values"
+      class="mb-4"
+    >
+      <svg [name]="widget.icon" cIcon class="my-4 text-white" height="52"></svg>
+      <ng-container *ngIf="withCharts">
+        <c-chart
+          #chart="cChart"
+          [data]="widget.data"
+          [options]="chartOptions"
+          class="position-absolute w-100 h-100"
+          type="line"
+        >{{ chart.id }}</c-chart
+        >
+      </ng-container>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
+-->

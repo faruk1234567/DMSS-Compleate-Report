@@ -1,0 +1,174 @@
+/* Add these styles to your tls-municipality-demand.component.scss file */
+
+.table-responsive.table-container-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 10px 12px;
+    border: 1px solid #e9ecef;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+thead {
+    background-color: #343a40;
+    color: #ffffff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+th {
+    background-color: #343a40;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: normal;
+    padding: 12px 15px;
+    border-color: #495057;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* নির্দিষ্ট কলামের প্রস্থ সমন্বয় করুন */
+.table.table-striped.table-bordered.table-hover {
+    /* 1. ক্রঃ নং (Serial No.) */
+    th:nth-child(1),
+    td:nth-child(1) {
+        min-width: 80px;
+        width: 80px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* 2. মোবাইল নম্বর */
+    th:nth-child(2),
+    td:nth-child(2) {
+        min-width: 140px;
+        width: 140px;
+    }
+
+    /* 3. ট্রানজেকশন ডেট */
+    th:nth-child(3),
+    td:nth-child(3) {
+        min-width: 180px;
+        width: 180px;
+    }
+
+    /* 4. লাইসেন্স নম্বর */
+    th:nth-child(4),
+    td:nth-child(4) {
+        min-width: 140px;
+        width: 140px;
+    }
+
+    /* 5. টাইটেল */
+    th:nth-child(5),
+    td:nth-child(5) {
+        min-width: 220px;
+        width: 250px;
+        white-space: normal;
+    }
+
+    /* 6. জাতীয় পরিচয় পত্র নম্বর (NID) */
+    th:nth-child(6),
+    td:nth-child(6) {
+        min-width: 160px;
+        width: 160px;
+    }
+
+    /* 7. অ্যামাউন্ট */
+    th:nth-child(7),
+    td:nth-child(7) {
+        min-width: 110px;
+        width: 110px;
+    }
+
+    /* সাইনবোর্ড টাইপ কলামটি সরিয়ে দেওয়ায়, 'সাইন বোর্ড বিস্তারিত' এখন 8ম কলাম হবে */
+    /* 8. সাইন বোর্ড বিস্তারিত (মাস্টার হেডার, প্রথম tr-এ) */
+    th:nth-child(8) { /* <--- এখানে nth-child(9) থেকে nth-child(8) করা হয়েছে */
+        text-align: center;
+        font-weight: 700;
+        background-color: #212529;
+        color: #fff;
+        border-bottom: 2px solid #007bff;
+        /* নিচের ৩টি কলামের মোট প্রস্থের সমান width দিন */
+        width: calc(120px + 100px + 100px); /* রেট/ফিট (120) + দৈর্ঘ্য (100) + প্রস্থ (100) = 320px */
+        min-width: calc(120px + 100px + 100px);
+    }
+
+    /* দ্বিতীয় tr এর কলামগুলোর জন্য (টাইপ, রেট/ফিট, দৈর্ঘ্য, প্রস্থ) */
+    thead tr:nth-child(2) th {
+        background-color: #6c757d;
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    thead tr:nth-child(2) th:nth-child(1) { /* টাইপ */
+        min-width: 120px; /* এই কলামটি এখন নতুন "টাইপ" হেডার */
+        width: 120px;
+    }
+    thead tr:nth-child(2) th:nth-child(2) { /* রেট/ফিট */
+        min-width: 100px;
+        width: 100px;
+    }
+    thead tr:nth-child(2) th:nth-child(3) { /* দৈর্ঘ্য */
+        min-width: 100px;
+        width: 100px;
+    }
+    thead tr:nth-child(2) th:nth-child(4) { /* প্রস্থ */
+        min-width: 100px;
+        width: 100px;
+    }
+
+    /* ডেটা সেলের জন্য (এগুলি td:nth-child() ব্যবহার করবে) */
+    /* সাইনবোর্ড টাইপ কলামটি সরিয়ে দেওয়ায়, এদের nth-child নাম্বারও পরিবর্তন হবে */
+    /* 8. সাইনবোর্ড টাইপ (যদি ডেটা হিসাবে থাকে তবে তার জন্য, তবে হেডার না থাকায় এটি সরিয়ে দেওয়া হয়েছে)
+       কিন্তু আপনার HTML এ `<td>{{ item.signboardtype }}</td>` আছে।
+       যদি HTML থেকে `<td>{{ item.signboardtype }}</td>` সরিয়ে দেন, তাহলে নিচের কলামগুলোর nth-child নাম্বারও এক ধাপ কমবে।
+       আপনার HTML `tbody` থেকে `<td>{{ item.signboardtype }}</td>` সরানোর পর,
+       `<td>{{ item.signboardpersft }}</td>` হবে ৮ম কলাম,
+       `<td>{{ item.height }}</td>` হবে ৯ম কলাম,
+       `<td>{{ item.width }}</td>` হবে ১০ম কলাম।
+    */
+
+    td:nth-child(8) { /* item.signboardpersft - এখন ৮ম কলাম (আগে ৯ নম্বর) */
+        min-width: 120px;
+        width: 120px;
+    }
+    td:nth-child(9) { /* item.height - এখন ৯ম কলাম (আগে ১০ নম্বর) */
+        min-width: 100px;
+        width: 100px;
+    }
+    td:nth-child(10) { /* item.width - এখন ১০ম কলাম (আগে ১১ নম্বর) */
+        min-width: 100px;
+        width: 100px;
+    }
+}
+
+/* Striped rows for better readability */
+.table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Hover effect */
+.table.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+    cursor: pointer;
+}

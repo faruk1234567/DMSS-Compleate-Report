@@ -1,0 +1,243 @@
+<app-widgets-brand
+  [serviceCountAndIncomeData]="serviceCountAndIncomeData"
+  [waterBillServiceCountAndIncomeData]="waterBillServiceCountAndIncomeData"
+  [tlsServiceCountAndIncomeData]="tlsServiceCountAndIncomeData"
+  [htServiceCountAndIncomeData]="htServiceCountAndIncomeData"
+  [certificateServiceCountAndIncomeData]="certificateServiceCountAndIncomeData"
+  [propertyServiceCountAndIncomeData]="propertyServiceCountAndIncomeData">
+
+</app-widgets-brand>
+
+<c-row *ngIf="dataLoaded">
+  <c-col lg="4" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle> Municipality Wise Service Provided </h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <c-chart [data]="pieChartData" [options]="pieChartOption" type="pie"></c-chart>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <c-col lg="8" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle> Municipality Wise  Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <c-chart [data]="barChartData" type="bar" [options]="barChartOption"></c-chart>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise All Service and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of municipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise Tread License and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of tlMunicipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise Holding tax and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of htMunicipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise Water Bill Service and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of waterMunicipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise Property and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of propertyMunicipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+
+  <c-col lg="6" xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <h5 cCardTitle>Municipality Wise Certificate Service and Income</h5>
+      </c-card-header>
+      <c-card-body>
+        <c-row>
+          <c-col lg="12" [xs]="12">
+            <table cTable hover>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Municipality</th>
+                <th scope="col">Total Service</th>
+                <th scope="col">Total Income</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let municipalityData of certificateMunicipalityServiceData; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ municipalityData.municipalityName }}</td>
+                <td>{{ formatNumber(municipalityData.totalService) }}</td>
+                <td>{{ formatNumber(municipalityData.totalIncome) }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </c-col>
+        </c-row>
+      </c-card-body>
+
+    </c-card>
+  </c-col>
+</c-row>

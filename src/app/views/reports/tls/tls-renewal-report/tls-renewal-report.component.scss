@@ -1,0 +1,149 @@
+/* Add these styles to your tls-municipality-demand.component.scss file */
+
+.table-responsive.table-container-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures column widths are respected */
+}
+
+th, td {
+    padding: 10px 12px;
+    border: 1px solid #e9ecef;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap; /* Keep content on single line */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for overflow content */
+}
+
+thead {
+    background-color: #343a40;
+    color: #ffffff;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+th {
+    background-color: #343a40;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: normal; /* Allow header text to wrap */
+    padding: 12px 15px;
+    border-color: #495057;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* নির্দিষ্ট কলামের প্রস্থ সমন্বয় */
+.table.table-striped.table-bordered.table-hover {
+    /* 1. ক্রঃ নং (Serial No.) */
+    th:nth-child(1),
+    td:nth-child(1) {
+        min-width: 80px;
+        width: 80px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* 2. মোবাইল নম্বর */
+    th:nth-child(2),
+    td:nth-child(2) {
+        min-width: 140px;
+        width: 140px;
+    }
+
+    /* 3. ট্রানজেকশন ডেট */
+    th:nth-child(3),
+    td:nth-child(3) {
+        min-width: 180px;
+        width: 180px;
+    }
+
+    /* 4. লাইসেন্স নম্বর */
+    th:nth-child(4),
+    td:nth-child(4) {
+        min-width: 140px;
+        width: 140px;
+    }
+
+    /* 5. টাইটেল */
+    th:nth-child(5),
+    td:nth-child(5) {
+        min-width: 220px;
+        width: 250px;
+        white-space: normal; /* Allow title content to wrap */
+    }
+
+    /* 6. জাতীয় পরিচয় পত্র নম্বর (NID) */
+    th:nth-child(6),
+    td:nth-child(6) {
+        min-width: 160px;
+        width: 160px;
+    }
+
+    /* 7. অ্যামাউন্ট */
+    th:nth-child(7),
+    td:nth-child(7) {
+        min-width: 110px;
+        width: 110px;
+    }
+
+    /* 8. ওয়ার্ড নম্বর (Ward No.) - আপনার সমস্যা ছিল এখানে */
+    th:nth-child(8),
+    td:nth-child(8) {
+        min-width: 100px; /* ছোট প্রস্থ সেট করা হলো */
+        width: 100px;
+        text-align: center; /* Optionally center align ward number */
+        white-space: nowrap; /* Keep content on single line */
+    }
+
+    /* Remove specific styles for the non-existent second header row (thead tr:nth-child(2) th) */
+    /* If these properties were meant for different columns, they need proper nth-child indexing */
+    /* thead tr:nth-child(2) th {
+        background-color: #6c757d;
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        padding: 8px 10px;
+    } */
+
+    /* The following rules (td:nth-child(8), td:nth-child(9), td:nth-child(10)) seem to target
+       columns that do not exist in your current 8-column table structure, or they are mis-indexed.
+       They might be leftovers from a previous table structure.
+       I am removing them to avoid unexpected styling. If you need them for future columns,
+       please re-add with correct nth-child indexing.
+    */
+    /* td:nth-child(8) {
+        min-width: 120px;
+        width: 120px;
+    }
+    td:nth-child(9) {
+        min-width: 100px;
+        width: 100px;
+    }
+    td:nth-child(10) {
+        min-width: 100px;
+        width: 100px;
+    } */
+}
+
+/* Striped rows for better readability */
+.table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Hover effect */
+.table.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+    cursor: pointer;
+}

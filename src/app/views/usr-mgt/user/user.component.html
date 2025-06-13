@@ -1,0 +1,41 @@
+<c-card class="mb-4">
+  <c-card-header ngPreserveWhitespaces>
+    <strong>Create/Update User </strong>
+  </c-card-header>
+  <c-card-body>
+    <form cForm class="row g-3">
+      <c-col [md]="6">
+        <label cLabel for="inputName">Name</label>
+        <input cFormControl id="inputName" type="text" />
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="inputEmail">Email</label>
+        <input cFormControl id="inputEmail" type="email" />
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="inputMobileNo">Mobile No</label>
+        <input cFormControl id="inputMobileNo" type="text" />
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="inputMunicipality">Municipality</label>
+        <select cSelect id="inputMunicipality" name="inputMunicipality" [(ngModel)]="user.municipalityId">
+          <option [ngValue]="0">Choose...</option>
+          <option *ngFor="let municipality of municipalityList" [ngValue]="municipality.id"> {{ municipality.name }}</option>
+        </select>
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="inputUsername">Username</label>
+        <input cFormControl id="inputUsername" type="text" />
+      </c-col>
+
+      <c-col [md]="6">
+        <label cLabel for="inputPassword">Password</label>
+        <input cFormControl id="inputPassword" type="password" />
+      </c-col>
+    </form>
+  </c-card-body>
+</c-card>

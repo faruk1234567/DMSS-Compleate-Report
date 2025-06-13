@@ -1,0 +1,163 @@
+<div class="container-fluid px-3 px-md-4">
+  <div class="card shadow-lg mb-4 rounded-3 border-0">
+  <div class="card-header bg-dark text-white py-3 px-4 d-flex align-items-center justify-content-between rounded-top-3"> <h2 class="h5 mb-0 fw-bold"><i class="bi bi-file-earmark-text-fill me-2"></i>হোল্ডিং ট্যাক্স দৈনিক রিপোর্ট</h2>
+  </div>
+  <div class="card-body p-4">
+    <form (ngSubmit)="getReport()" #reportForm="ngForm" class="row g-4 align-items-end">
+      <div class="col-12 col-sm-6 col-md-3">
+        <label for="municipalityId" class="form-label mb-2 fw-semibold text-dark">পৌরসভা আইডি:</label> <input type="number" class="form-control form-control-lg rounded-pill border-dark" id="municipalityId" name="municipalityId" [(ngModel)]="formData.municipalityId" required /> <div *ngIf="reportForm.controls['municipalityId']?.invalid && reportForm.controls['municipalityId']?.touched" class="text-danger small mt-1">
+          পৌরসভা আইডি প্রয়োজন।
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <label for="startDate" class="form-label mb-2 fw-semibold text-dark">শুরুর তারিখ:</label> <div class="input-group input-group-lg rounded-pill overflow-hidden">
+          <input type="date" class="form-control border-dark border-end-0" id="startDate" name="startDate" [(ngModel)]="formData.startDate" required /> <span class="input-group-text bg-white border-dark border-start-0 text-primary"> <i class="bi bi-calendar-date fs-5"></i>
+          </span>
+        </div>
+        <div *ngIf="reportForm.controls['startDate']?.invalid && reportForm.controls['startDate']?.touched" class="text-danger small mt-1">
+          শুরুর তারিখ প্রয়োজন।
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <label for="endDate" class="form-label mb-2 fw-semibold text-dark">শেষের তারিখ:</label> <div class="input-group input-group-lg rounded-pill overflow-hidden">
+          <input type="date" class="form-control border-dark border-end-0" id="endDate" name="endDate" [(ngModel)]="formData.endDate" required /> <span class="input-group-text bg-white border-dark border-start-0 text-primary"> <i class="bi bi-calendar-date fs-5"></i>
+          </span>
+        </div>
+        <div class="text-danger small mt-1" *ngIf="reportForm.controls['endDate']?.invalid && reportForm.controls['endDate']?.touched">
+          শেষের তারিখ প্রয়োজন।
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-dark btn-lg flex-grow-1 shadow-sm rounded-pill" [disabled]="!reportForm.form.valid"> <i class="bi bi-search me-2"></i> রিপোর্ট দেখুন
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <div class="card shadow-sm mb-4" *ngIf="showReport">
+    <div class="card-body py-3">
+      <div class="row g-3 align-items-center">
+        <div class="col-12 col-md-6">
+          <label for="searchHoldingNo" class="form-label mb-1">হোল্ডিং নং দিয়ে সার্চ করুন:</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id="searchHoldingNo"
+            name="searchHoldingNo"
+            [(ngModel)]="formData.searchHoldingNo"
+            (input)="onSearchHoldingNoChange()"
+            placeholder="হোল্ডিং নম্বর লিখুন..."
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="card shadow-sm mb-4" *ngIf="showReport">
+  <div class="card-header bg-info text-white py-2 custom-card-header d-flex justify-content-between align-items-center">
+    <h2 class="h5 mb-0">রিপোর্টের তথ্য</h2>
+    <div class="d-flex">
+      <button class="btn btn-light btn-sm me-2" (click)="downloadExcel()" [disabled]="!reportData || reportData.length === 0">
+        <i class="bi bi-file-earmark-excel me-1"></i> Excel ডাউনলোড
+      </button>
+      <button class="btn btn-light btn-sm" (click)="downloadCsv()" [disabled]="!reportData || reportData.length === 0">
+        <i class="bi bi-file-earmark-spreadsheet me-1"></i> CSV ডাউনলোড
+      </button>
+      
+      </div>
+  </div>
+  <div class="bg-white p-3 border-bottom">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="w-50 d-flex align-items-center justify-content-start" style="border-right: 1px solid #c12525; padding-right: 10px;">
+        <strong>বকেয়া</strong>
+      </div>
+      <div class="w-50 d-flex align-items-center justify-content-end" style="padding-left: 10px;">
+        <strong>হাল</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive table-container-scroll">
+      <table class="table table-striped table-bordered table-hover mb-0">
+        <thead class="sticky-top-table-header">
+          <tr>
+            <th>জমার তারিখ</th>
+            <th>হোল্ডিং নং</th>
+            <th>মূল্যায়ন কর</th>
+            <th>বকেয়া</th>
+            <th>সারচার্জ</th>
+            <th>হোল্ডিং (বকেয়া)</th>
+            <th>কনজারভেন্সী (বকেয়া)</th>
+            <th>বিদ্যুৎ (বকেয়া)</th>
+            <th>পানি (বকেয়া)</th>
+            <th>মোট (বকেয়া)</th>
+            <th>হোল্ডিং (হাল)</th>
+            <th>কনজারভেন্সী (হাল)</th>
+            <th>বিদ্যুৎ (হাল)</th>
+            <th>পানি (হাল)</th>
+            <th>রিবেট</th>
+            <th>মোট (হাল)</th>
+            <th>সর্বমোট</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="reportData && reportData.length > 0; else noData">
+            <tr *ngFor="let item of reportData">
+              <td>{{ item.paidDate }}</td>
+              <td>{{ item.holdingNo }}</td>
+              <td>{{ item.annualValue }}</td>
+              <td>{{ item.unpaidBill }}</td>
+              <td>{{ item.surcharge }}</td>
+              <td>{{ item.dueHolding }}</td>
+              <td>{{ item.dueCon }}</td>
+              <td>{{ item.dueElectricity }}</td>
+              <td>{{ item.dueWater }}</td>
+              <td>{{ item.total }}</td>
+              <td>{{ item.holding }}</td>
+              <td>{{ item.con }}</td>
+              <td>{{ item.electricity }}</td>
+              <td>{{ item.water }}</td>
+              <td>{{ item.rebet }}</td>
+              <td>{{ item.netTotal }}</td>
+              <td>{{ item.paidMoney }}</td>
+            </tr>
+          </ng-container>
+          <ng-template #noData>
+            <tr>
+              <td colspan="18" class="text-center p-4 text-danger">
+                কোনো ডেটা পাওয়া যায়নি। ডেটা দেখতে উপরের ফর্ম পূরণ করে "রিপোর্ট দেখুন" বাটনে ক্লিক করুন।
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+        <tfoot *ngIf="reportData && reportData.length > 0">
+          <tr>
+            <td class="fw-bold ps-3">Total:</td>
+            <td class="fw-bolder fs-5 pe-3">{{getTotalHoldingNoCount()}}</td>
+            <td></td>
+            <td class="fw-bolder fs-5 pe-3">{{getUnpaidBill() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{getSurcharge() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{getDueHolding() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{getDueConsevency() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{getDueElectriCity() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getDueWater() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{getTotalTotalBill() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getCurrentHolding() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getCurrentConsevency() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getCurrentElectriCity() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getCurrentWater() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getTotalRebet() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getTotalGetNetBill() }}</td>
+            <td class="fw-bolder fs-5 pe-3">{{ getTotalPaidMoney() }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
